@@ -1,4 +1,4 @@
-package marko.androidapp.letsdoit;
+package marko.androidapp.letsdoit.Activities;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+
+import marko.androidapp.letsdoit.R;
 
 public class SecondFragment extends Fragment {
 

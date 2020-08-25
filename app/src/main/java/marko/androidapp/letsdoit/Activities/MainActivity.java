@@ -1,4 +1,4 @@
-package marko.androidapp.letsdoit;
+package marko.androidapp.letsdoit.Activities;
 
 import android.os.Bundle;
 
@@ -12,6 +12,8 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+
+import marko.androidapp.letsdoit.R;
 
 public class MainActivity extends AppCompatActivity {
 
