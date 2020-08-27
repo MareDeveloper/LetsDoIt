@@ -1,8 +1,10 @@
 package marko.androidapp.letsdoit.Activities;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -18,12 +20,16 @@ import android.view.MenuItem;
 
 import marko.androidapp.letsdoit.R;
 
-public class MainActivity extends AppCompatActivity
-{
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private AlertDialog.Builder dialogBuilder;
-    private AlertDialog builder;
+    private AlertDialog dialog;
     private EditText title;
     private EditText description;
+    private EditText datePicker;
     private Button save;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -72,6 +78,74 @@ public class MainActivity extends AppCompatActivity
 
     private void createPopUpDialog()
     {
+        dialogBuilder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.popup, null);
+        title = findViewById(R.id.title_task);
+        description = findViewById(R.id.task_description);
+        save = findViewById(R.id.save_btn);
+
+        dialogBuilder.setView(view);
+        dialog = dialogBuilder.create();
+        dialog.show();
+        createCalendar();
+//        save.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //Todo: Save to DB
+//                //Todo: Go to next screen
+//
+////                saveTaskToDB(v);
+
+//            }
+//        });
+
+//        if(title.getText().toString().equals("") && description.getText().toString().equals(""))
+//        {
+//            title.setError("Please add name of your task");
+//            description.setError("No without description, it is important!");
+//        }
+    }
+    private void createCalendar()
+    {
+        //Calendar
+        final Calendar calendar = Calendar.getInstance();
+        datePicker = findViewById(R.id.datePicker);
+        this.datePicker.setOnClickListener(this);
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
+        datePicker.OnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        })
+//        datePicker.OnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new DatePickerDialog(MainActivity.this, date,
+//                        calendar.get(Calendar.YEAR),
+//                        calendar.get(Calendar.MONTH),
+//                        calendar.get(Calendar.DAY_OF_MONTH)).show();
+//            }
+//        });
+    }
+//    Calendar setUp
+    private void updateLabel()
+    {
+        String format = "MM/dd/yy";
+        SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.ITALY);
+    }
+//  Update data from popup to DB
+    private void saveTaskToDB(View v)
+    {
 
     }
+
 }
