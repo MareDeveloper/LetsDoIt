@@ -15,4 +15,6 @@
     <string name="hint_description">Enter Task Description</string>
     <string name="save_task">Add Task</string>
     <string name="settaskdodate">Set task do date</string>
+    <string name="chooseEndDate">Choose task do date</string>
+    <string name="saveDate">Save date</string>
 </resources>
