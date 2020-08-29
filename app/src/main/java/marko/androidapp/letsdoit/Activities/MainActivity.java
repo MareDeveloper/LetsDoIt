@@ -3,6 +3,7 @@ package marko.androidapp.letsdoit.Activities;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 
+import android.text.InputType;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import marko.androidapp.letsdoit.R;
 
@@ -24,13 +26,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
     private EditText title;
     private EditText description;
-    private EditText datePicker;
     private Button save;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
                 createPopUpDialog();
+
             }
         });
     }
@@ -76,18 +79,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+//    PopUp dialog box
     private void createPopUpDialog()
     {
         dialogBuilder = new AlertDialog.Builder(this);
         View view = getLayoutInflater().inflate(R.layout.popup, null);
-        title = findViewById(R.id.title_task);
-        description = findViewById(R.id.task_description);
-        save = findViewById(R.id.save_btn);
+        title = view.findViewById(R.id.title_task);
+        description = view.findViewById(R.id.task_description);
+        save = view.findViewById(R.id.save_btn);
 
         dialogBuilder.setView(view);
         dialog = dialogBuilder.create();
         dialog.show();
-        createCalendar();
+
 //        save.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -99,48 +103,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            }
 //        });
 
-//        if(title.getText().toString().equals("") && description.getText().toString().equals(""))
-//        {
-//            title.setError("Please add name of your task");
-//            description.setError("No without description, it is important!");
-//        }
-    }
-    private void createCalendar()
-    {
-        //Calendar
-        final Calendar calendar = Calendar.getInstance();
-        datePicker = findViewById(R.id.datePicker);
-        this.datePicker.setOnClickListener(this);
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                calendar.set(Calendar.YEAR, year);
-                calendar.set(Calendar.MONTH, month);
-                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
-            }
-        };
-        datePicker.OnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        })
-//        datePicker.OnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                new DatePickerDialog(MainActivity.this, date,
-//                        calendar.get(Calendar.YEAR),
-//                        calendar.get(Calendar.MONTH),
-//                        calendar.get(Calendar.DAY_OF_MONTH)).show();
-//            }
-//        });
-    }
-//    Calendar setUp
-    private void updateLabel()
-    {
-        String format = "MM/dd/yy";
-        SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.ITALY);
     }
 //  Update data from popup to DB
     private void saveTaskToDB(View v)
